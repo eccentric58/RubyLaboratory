@@ -1,0 +1,27 @@
+<h1>
+Input
+<%= @input_params %>
+</h1>
+<table border="2" cellspacing="10" cellpadding="10">
+  <% @show_array.each do |e|%>
+    <tr>
+      <td>size:</td>
+      <td><%= e.length %> </td>
+      <td>   array:</td>
+      <% e.each do |n|%>
+        <td>
+          <%= n%>
+        </td>
+      <% end %>
+
+    </tr>
+  <% end %>
+</table>
+<h1>Max</h1>
+<% @show_array[0].each do |n|%>
+   <%= n%>,
+<% end %>
+
+
+<h1>Count</h1>
+<%= @show_array.length %>

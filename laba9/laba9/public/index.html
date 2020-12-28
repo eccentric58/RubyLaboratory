@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <script src="moz-extension://c8fc5d86-05c3-4ed5-9b0a-a61219e1254b/page/prompt.js"></script><script src="moz-extension://c8fc5d86-05c3-4ed5-9b0a-a61219e1254b/page/runScript.js"></script><head>
+    <title>L9App</title>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token" content="bQPP/EQLObXAxVgTKu9zvx7QUPtzkH5axvSfdhFjnAsrRDKTFRvrk8EmfT4zlY93v0Hf/yoQZfOTXJ1LsHV5Sg==">
+    <link rel="stylesheet" media="all" href="/assets/application.debug-5d1377e8cc3f0d04a420c70625568b753ae14d83c570856d8f0605e220974f66.css" data-turbolinks-track="reload">
+    <script>
+        converter_url =  location.protocol + "//" + location.host + "/converter/view.json"
+        function send_query(){
+            var frm = document.forms.converter_form;
+            var val = frm.val.value;
+            var param_str = "?val=" + String(val) + "&commit=Find";
+            if (param_str == "") return false; 
+            var my_JSON_object = {};
+            var http_request = new XMLHttpRequest();
+            http_request.open("GET", converter_url + param_str, true);
+            http_request.onreadystatechange = () => {
+                var done = 4, ok = 200;
+                if (http_request.readyState == done &&
+                    http_request.status == ok) {
+                    my_JSON_object =
+                    JSON.parse(http_request.responseText);
+                    show_result(my_JSON_object);
+                }
+            };
+            http_request.send(null);
+            return false; 
+            function show_result(data) {
+                var res = document.getElementById("result");
+                
+                res.innerHTML = `<hr/><p>Result ${data.value}</p> `
+            } 
+        } 
+    </script>
+</head>
+
+  <body>
+    <h1>Converter</h1>
+    <p>Enter value (&gt;0)</p>
+    <form name="converter_form" accept-charset="UTF-8" method="get">
+        <label for="Value:">Value:</label>
+        <input type="text" name="val" id="val" placeholder="6"> 
+
+        <br><br>
+        <input type="submit" onclick="return send_query();" name="commit" value="Find" data-disable-with="Find">
+    </form>
+    <div id="result"></div>
+
+</body>
+</html>

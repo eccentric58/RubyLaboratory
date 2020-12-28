@@ -1,0 +1,24 @@
+<%= form_for :page, url: output_url do |f| %>
+    <p>n <%= f.text_field :count %></p>
+    <p>array <%= f.text_area :array %></p>
+    <%= f.submit%>
+<% end %>
+
+<% if current_user %>
+<br/>
+Logged in as <%= current_user.emeil %>
+<br/>
+<%= link_to "Log Out", logout_path %>
+<% else %>
+
+
+<%= link_to "Sign Up", signup_path %> or
+<%= link_to "Log In", login_path %>
+<br/>
+
+<% end %>
+<br/>
+<%= link_to 'Edit account', edit_path %>
+<br/>
+<%= link_to 'Users list', users_path %>
+<p id="notice"><%= notice %></p>

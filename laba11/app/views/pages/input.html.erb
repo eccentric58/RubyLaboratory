@@ -1,0 +1,5 @@
+<%= form_for :page, url: output_url do |f| %>
+    <p>n <%= f.text_field :count %></p>
+    <p>array <%= f.text_area :array %></p>
+    <%= f.submit%>
+<% end %>
